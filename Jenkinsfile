@@ -14,17 +14,19 @@ pipeline {
 '''
       }
     }
-    
+
     stage('Deploy') {
       steps {
         script {
-           docker.withRegistry(
-             'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials') {
-             def myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
-             myImage.push('latest')
-           }
+          docker.withRegistry(
+            'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials') {
+              def myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
+              myImage.push('latest')
+            }
+          }
+
         }
       }
+
     }
   }
-}
