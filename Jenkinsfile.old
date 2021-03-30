@@ -1,15 +1,14 @@
 node {
     def app
+    def myImage
 
     stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
         checkout scm
     }
 
     stage('Build image') {
         app = docker.build("2wetdogs/helloworld-node")
-        ecrbuild = docker.build("helloworld-node")
+        myImage = docker.build("472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node")  
     }
 
     stage('Test image') {
@@ -24,11 +23,7 @@ node {
             app.push("latest")
         }
     }
-    
+
     stage('Push Image to AWS ECR') {
-        docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:helloworld-node:aws-credentials') {
-            ecrbuild.push("${env.BUILD_NUMBER}") 
-            ecrbuild.push("latest")
-        }
-    }
+   }
 }
