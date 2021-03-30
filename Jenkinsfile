@@ -25,7 +25,7 @@ node {
     }
     
     stage('Push Image to AWS ECR') {
-        docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
+        docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node',
             'ecr:us-east-1:aws-credentials') {
             app.push("${env.BUILD_NUMBER}") 
             app.push("latest")
