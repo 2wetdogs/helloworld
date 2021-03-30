@@ -31,5 +31,5 @@ node {
         myImage.push("${env.BUILD_NUMBER}") 
         myImage.push("latest")
       }
-    }
+   }
 }
