@@ -24,12 +24,10 @@ node {
     }
     
     stage('Push Image to AWS ECR') {
-          script {
-            docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
-              def myImage = docker.build("472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node")  
-              myImage.push("${env.BUILD_NUMBER}") 
-              myImage.push("latest")
-          }
+       docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
+             def myImage = docker.build("472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node")  
+             myImage.push("${env.BUILD_NUMBER}") 
+             myImage.push("latest")
       }
    }
 }
