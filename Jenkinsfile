@@ -13,7 +13,7 @@ pipeline {
           def myImage
 
           myImage = docker.build("${ECR_REPO_NAME}")
-          myImage = docker.build("${ECR_REPO_NAME:${env.BUILD_NUMBER}}")
+          myImage = docker.build("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
         }
 
       }
