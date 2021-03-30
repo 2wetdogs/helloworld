@@ -26,7 +26,7 @@ node {
     
     stage('Push Image to AWS ECR') {
       steps {
-          script{
+          script {
             docker.withRegsitry('https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
               'ecr:us-east-1:aws-credentials') {
               def myImage = docker.build('hellowworld-node')  
