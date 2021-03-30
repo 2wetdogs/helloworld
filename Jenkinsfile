@@ -10,7 +10,7 @@ node {
 
     stage('Build image') {
         app = docker.build("2wetdogs/helloworld-node")
-        myImage = docker.build('helloworld-node')  
+        myImage = docker.build("helloworld-node")  
     }
 
     stage('Test image') {
