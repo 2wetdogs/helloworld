@@ -20,11 +20,11 @@ pipeline {
       steps {
         script {
           docker.withRegistry(
-            "https://472675133747.dkr.ecr.us-east-1.amazonaws.com",
+            'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
             'ecr:us-east-1:aws.credentials')
             {
               def myImage = docker.image("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
-              myImage.Push("${env.BUILD_NUMBER}")
+              myImage.Push()
             }
           }
 
