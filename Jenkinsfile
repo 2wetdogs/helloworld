@@ -39,7 +39,7 @@ node {
         script {
           docker.withRegsitry(
             'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
-            'ecr:helloworld-node:'aws-credentials') {
+            'ecr:helloworld-node:'aws-credentials') 
             def myImage = docker.build('helloworld-node')
             myImage.push{'latest')
           }
