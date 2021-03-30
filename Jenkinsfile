@@ -11,6 +11,7 @@ pipeline {
       steps {
         script {
           def myImage = docker.build("${ECR_REPO_NAME}")
+          def myImage = docker.build("${ECR_REPO_NAME:${env.BUILD_NUMBER}}")
         }
 
       }
