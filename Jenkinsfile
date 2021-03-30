@@ -20,7 +20,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry(
-            "${ECR_SERVER}",
+            "http://${ECR_SERVER}",
             'ecr:us-east-1:aws.credentials')
             {
               def myImage = docker.image("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
