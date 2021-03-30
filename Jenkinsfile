@@ -27,6 +27,7 @@ pipeline {
             {
               def myImage = docker.image("${ECR_REPO_NAME}")
               myImage.push('latest')
+              myImage.push("${env.BUILD_NUMBER}")
             }
           }
 
