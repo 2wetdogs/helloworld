@@ -7,10 +7,11 @@ pipeline {
       }
     }
 
-    stage('Docker Image') {
+    stage('Docker Build') {
       steps {
         script {
-          myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
+          myImage = docker.build("472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node:${env.BUILD_NUMBER}")
+          myImage = docker.build("472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node:latest")
         }
 
       }
