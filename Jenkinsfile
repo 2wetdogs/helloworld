@@ -35,4 +35,7 @@ pipeline {
       }
 
     }
+    environment {
+      ECR_REPO_NAME = '472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node'
+    }
   }
