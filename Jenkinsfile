@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  def myImage
   stages {
     stage('Clone Repositry') {
       steps {
@@ -9,11 +10,8 @@ pipeline {
 
     stage('Docker Image') {
       steps {
-        sh '''#!/bin/bash
-#docker build -t 472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node -f Dockerfile .
-'''
         script {
-          def myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
+          myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
         }
 
       }
