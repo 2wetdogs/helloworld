@@ -23,7 +23,7 @@ node {
         }
     }
 
-    stage('Push image') {
+    stage('Push image to DockerHub') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
@@ -32,5 +32,18 @@ node {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
+    }
+    
+    stage('Push Image to AWS ECR') {
+      steps{
+        script {
+          docker.withRegsitry(
+            'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
+            'ecr:helloworld-node:'aws-credentials') {
+            def myImage = docker.build('helloworld-node')
+            myImage.push{'latest')
+          }
+        } 
+      }
     }
 }
