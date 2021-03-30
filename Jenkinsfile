@@ -7,5 +7,12 @@ pipeline {
       }
     }
 
+    stage('Docker Image') {
+      steps {
+        sh '''#!/bin/bash
+docker build -t helloworld-node -f Dockerfile .'''
+      }
+    }
+
   }
 }
