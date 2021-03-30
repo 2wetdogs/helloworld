@@ -10,7 +10,7 @@ pipeline {
     stage('Docker Build') {
       steps {
         script {
-          def a
+          def myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
         }
 
       }
@@ -22,8 +22,7 @@ pipeline {
           docker.withRegistry(
             'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
             {
-              def myImage = docker.build('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
-              //def myImage = docker.image('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
+              def myImage = docker.image('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
               myImage.push('latest')
             }
           }
