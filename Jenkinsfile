@@ -10,7 +10,6 @@ pipeline {
     stage('Docker Build') {
       steps {
         script {
-          myImage = docker.build("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
           myImage = docker.build("${ECR_REPO_NAME}:latest")
         }
 
@@ -21,11 +20,12 @@ pipeline {
       steps {
         script {
           docker.withRegistry(
-            'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
+            "${ECR_SERVER}",
             'ecr:us-east-1:aws.credentials')
             {
-              def myImage = docker.image('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
+              def myImage = docker.image("${ECR_REPO_NAME}")
               myImage.push('latest')
+              myImage.Push("${env.BUILD_NUMBER}")
             }
           }
 
@@ -35,5 +35,6 @@ pipeline {
     }
     environment {
       ECR_REPO_NAME = '472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node'
+      ECR_SERVER = '472675133747.dkr.ecr.us-east-1.amazonaws.com'
     }
   }
