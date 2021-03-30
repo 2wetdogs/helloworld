@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  def myImage
   stages {
     stage('Clone Repositry') {
       steps {
@@ -24,7 +23,7 @@ pipeline {
             'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
             'ecr:us-east-1:aws.credentials')
             {
-              myImage.push("${env.BUILD_NUMBER}")
+              def myImage = docker.image('472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node')
               myImage.push('latest')
             }
           }
