@@ -23,8 +23,8 @@ pipeline {
             'https://472675133747.dkr.ecr.us-east-1.amazonaws.com',
             'ecr:us-east-1:aws.credentials')
             {
-              def myImage = docker.image("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
-              myImage.Push()
+              def myImage = docker.image("${ECR_REPO_NAME}")
+              myImage.Push("latest")
             }
           }
 
