@@ -10,8 +10,10 @@ pipeline {
     stage('Docker Build') {
       steps {
         script {
-          def myImage = docker.build("${ECR_REPO_NAME}")
-          def myImage = docker.build("${ECR_REPO_NAME:${env.BUILD_NUMBER}}")
+          def myImage
+
+          myImage = docker.build("${ECR_REPO_NAME}")
+          myImage = docker.build("${ECR_REPO_NAME:${env.BUILD_NUMBER}}")
         }
 
       }
