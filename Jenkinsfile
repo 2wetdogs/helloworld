@@ -8,12 +8,29 @@ pipeline {
     }
 
     stage('Docker Build') {
-      steps {
-        script {
-          def myImage
+      parallel {
+        stage('472675133747') {
+          steps {
+            script {
+              def myImage
 
-          myImage = docker.build("${ECR_REPO_NAME}")
-          myImage = docker.build("${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
+              myImage = docker.build("472675133747${ECR_REPO_NAME}")
+              myImage = docker.build("472675133747${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
+            }
+
+          }
+        }
+
+        stage('169511295254') {
+          steps {
+            script {
+              def myImage
+
+              myImage = docker.build("169511295254${ECR_REPO_NAME}")
+              myImage = docker.build("169511295254${ECR_REPO_NAME}:${env.BUILD_NUMBER}")
+            }
+
+          }
         }
 
       }
