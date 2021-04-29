@@ -20,23 +20,43 @@ pipeline {
     }
 
     stage('Deploy to ECR') {
-      steps {
-        script {
-          docker.withRegistry(
-            'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
-            {
-              def myImage = docker.image("${ECR_REPO_NAME}")
-              myImage.push('latest')
-              myImage.push("${env.BUILD_NUMBER}")
+      parallel {
+        stage('472675133747') {
+          steps {
+            script {
+              docker.withRegistry(
+                'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
+                {
+                  def myImage = docker.image("472675133747${ECR_REPO_NAME}")
+                  myImage.push('latest')
+                  myImage.push("${env.BUILD_NUMBER}")
+                }
+              }
+
             }
           }
 
-        }
-      }
+          stage('169511295254') {
+            steps {
+              script {
+                docker.withRegistry(
+                  'https://169511295254.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
+                  {
+                    def myImage = docker.image("169511295254${ECR_REPO_NAME}")
+                    myImage.push('latest')
+                    myImage.push("${env.BUILD_NUMBER}")
+                  }
+                }
 
+              }
+            }
+
+          }
+        }
+
+      }
+      environment {
+        ECR_REPO_NAME = '.dkr.ecr.us-east-1.amazonaws.com/helloworld-node'
+        ECR_SERVER = '.dkr.ecr.us-east-1.amazonaws.com'
+      }
     }
-    environment {
-      ECR_REPO_NAME = '472675133747.dkr.ecr.us-east-1.amazonaws.com/helloworld-node'
-      ECR_SERVER = '472675133747.dkr.ecr.us-east-1.amazonaws.com'
-    }
-  }
