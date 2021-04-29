@@ -42,7 +42,7 @@ pipeline {
           steps {
             script {
               docker.withRegistry(
-                'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
+                'https://472675133747.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials.472675133747')
                 {
                   def myImage = docker.image("472675133747${ECR_REPO_NAME}")
                   myImage.push('latest')
@@ -57,7 +57,7 @@ pipeline {
             steps {
               script {
                 docker.withRegistry(
-                  'https://169511295254.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials')
+                  'https://169511295254.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws.credentials.169511295254')
                   {
                     def myImage = docker.image("169511295254${ECR_REPO_NAME}")
                     myImage.push('latest')
