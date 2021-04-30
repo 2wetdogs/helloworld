@@ -5,10 +5,14 @@ var hostname = os.hostname();
 
 // configure our HTTP server
 var server = http.createServer(function (request, response) {
-  if (req.url === '/helloworld' ) {
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World from " + hostname + "./n Welcome!");
+  console.log(request.url)
+  if (request.url === '/helloworld' ) {
+    console.log("helloworld path")
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.end("<html>Hello World from " + hostname + ".<br><br>Welcome!</html>");
   } else {
+    console.log("no pathfound")
+    response.writeHead(200, {"Content-Type": "text/plain"});
     response.statusCode = 404;
     response.end('404: File Not Found');
   }
