@@ -5,8 +5,13 @@ var hostname = os.hostname();
 
 // configure our HTTP server
 var server = http.createServer(function (request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello World from " + hostname + "./n Welcome!");
+  if (req.url === '/helloworld' ) {
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.end("Hello World from " + hostname + "./n Welcome!");
+  } else {
+    response.statusCode = 404;
+    response.end('404: File Not Found');
+  }
 });
 
 // listen on localhost:8000
